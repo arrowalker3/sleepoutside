@@ -8,17 +8,25 @@ function convertToJson(res) {
 }
 
 function setLocalStorage(key, data) {
-  if (localStorage.getItem("so-cart") == null) {
-    let storage = [];
-    storage.push(data);
-    localStorage.setItem(key, JSON.stringify(storage));
+  // Get what's saved in local storage
+  let storage = localStorage.getItem("so-cart");
+
+  // If null, create an array
+  if (storage == null) {
+    storage = [];
   } else {
-    let storage = localStorage.getItem("so-cart");
+    // otherwise, parse what's there
     storage = JSON.parse(storage);
-    storage.push(data);
-    localStorage.setItem(key, JSON.stringify(storage));
+
   }
-}
+  // Check if id already exists
+  // If yes, add to quantity
+
+  // Else, Add data
+  storage.push(data);
+
+  // Save
+  localStorage.setItem(key, JSON.stringify(storage));}
 
 // get tents data
 function getProductsData() {
