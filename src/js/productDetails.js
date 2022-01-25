@@ -41,7 +41,7 @@ export default class ProductDetails {
         document.querySelector('#productName').innerHTML = this.product.NameWithoutBrand;
         document.querySelector('#productImage').src = this.product.Image;
         document.querySelector('#productImage').alt = this.product.Name;
-        document.querySelector('.product-card__price').innerHTML = `$${this.product.FinalPrice}`;
+        document.querySelector('.product-card__price').innerHTML += this.product.FinalPrice;
         document.querySelector('.product__color').innerHTML = getColors(this.product);
         document.querySelector('.product__description').innerHTML = this.product.DescriptionHtmlSimple;
     }
