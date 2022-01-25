@@ -37,21 +37,13 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
-    document.querySelector("#title").innerHTML += this.product.Brand.Name;
-    document.querySelector("#brandName").innerHTML = this.product.Brand.Name;
-    document.querySelector(
-      "#productName"
-    ).innerHTML = this.product.NameWithoutBrand;
-    document.querySelector("#productImage").src = this.product.Image;
-    document.querySelector("#productImage").alt = this.product.Name;
-    document.querySelector(
-      ".product-card__price"
-    ).innerHTML = `$${this.product.FinalPrice}`;
-    document.querySelector(".product__color").innerHTML = getColors(
-      this.product
-    );
-    document.querySelector(
-      ".product__description"
-    ).innerHTML = this.product.DescriptionHtmlSimple;
+      document.querySelector('#title').innerHTML += this.product.Brand.Name;
+      document.querySelector('#brandName').innerHTML = this.product.Brand.Name;
+      document.querySelector('#productName').innerHTML = this.product.NameWithoutBrand;
+      document.querySelector('#productImage').src = this.product.Image;
+      document.querySelector('#productImage').alt = this.product.Name;
+      document.querySelector('.product-card__price').innerHTML += this.product.FinalPrice;
+      document.querySelector('.product__color').innerHTML = getColors(this.product);
+      document.querySelector('.product__description').innerHTML = this.product.DescriptionHtmlSimple;
   }
 }
