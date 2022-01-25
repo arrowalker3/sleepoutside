@@ -4,6 +4,19 @@ function getColors(product) {
     return colorNames.join(' + ');
 }
 
+function setLocalStorage(key, data) {
+  if (localStorage.getItem("so-cart") == null) {
+    let storage = [];
+    storage.push(data);
+    localStorage.setItem(key, JSON.stringify(storage));
+  } else {
+    let storage = localStorage.getItem("so-cart");
+    storage = JSON.parse(storage);
+    storage.push(data);
+    localStorage.setItem(key, JSON.stringify(storage));
+  }
+}
+
 export default class ProductDetails {
     constructor(productId, dataSource) {
         this.productId = productId;
@@ -14,10 +27,12 @@ export default class ProductDetails {
     async init() {
         this.product = await this.dataSource.findProductById(this.productId);
         this.renderProductDetails();
+        document.getElementById('addToCart')
+                .addEventListener('click', this.addToCart.bind(this));
     }
 
     addToCart(e) {
-        setLocalStorage("so-cart", product);
+        setLocalStorage("so-cart", this.product);
     }
 
     renderProductDetails() {
