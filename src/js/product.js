@@ -11,14 +11,14 @@ product.init();
 // dataSource.findProductById(getParam('product')).then(data => console.log(data));
 
 
-let products = [];
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
-  }
-}
+// let products = [];
+// function convertToJson(res) {
+//   if (res.ok) {
+//     return res.json();
+//   } else {
+//     throw new Error("Bad Response");
+//   }
+// }
 
 function setLocalStorage(key, data) {
   if (localStorage.getItem("so-cart") == null) {
