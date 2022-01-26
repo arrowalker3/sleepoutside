@@ -179,6 +179,16 @@ button {
   padding: 3px;
 }
 
+.cart-card__remove:hover {
+  color: white;
+  background-color: black;
+}
+
+.cart-card__remove:active {
+  color: red;
+  background-color: black;
+}
+
 .cart-card__image {
   position: relative;
   grid-row: 1/3;
