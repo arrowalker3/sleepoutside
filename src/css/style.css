@@ -30,6 +30,11 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+
+.hide {
+  display: none;
+}
+
 .logo {
   line-height: 60px;
   width: 245px;

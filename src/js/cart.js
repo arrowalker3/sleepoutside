@@ -13,6 +13,9 @@ function getCartContents() {
     const htmlItems = cartItems.map((item) => renderCartItem(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
+
+    renderCartTotal(cartItems);
+
     // Add event listeners to .cart-card__remove
     const removeElements = [...document.getElementsByClassName("cart-card__remove")];
     removeElements.map(element => element.addEventListener('click', removeFromCart));
@@ -20,6 +23,26 @@ function getCartContents() {
   // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
 }
 
+
+function getCartTotal(cartList) {
+  // foreach item,
+  // add to total
+  // return cart total
+  let total = 0;
+
+  cartList.forEach(product => {
+    total += product.FinalPrice;
+  });
+
+  return total.toFixed(2).toString();
+}
+
+function renderCartTotal(cartList) {
+  // get element and set to total
+  const element = document.querySelector('.cart-total');
+  element.innerHTML += getCartTotal(cartList);
+  element.parentElement.classList.remove("hide");
+  
 function removeFromCart(e) {
   e.preventDefault();
   const productId = e.target.getAttribute("data-id");
@@ -29,6 +52,7 @@ function removeFromCart(e) {
 
   setLocalStorage("so-cart", filteredList);
   getCartContents();
+
 }
 
 function renderCartItem(item) {
