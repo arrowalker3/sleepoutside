@@ -40,8 +40,9 @@ function getCartTotal(cartList) {
 function renderCartTotal(cartList) {
   // get element and set to total
   const element = document.querySelector('.cart-total');
-  element.innerHTML += getCartTotal(cartList);
+  element.innerHTML = `$${getCartTotal(cartList)}`;
   element.parentElement.classList.remove("hide");
+}
   
 function removeFromCart(e) {
   e.preventDefault();
