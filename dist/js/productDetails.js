@@ -1,6 +1,12 @@
-function getColors(product) {
-  const colorNames = product.Colors.map((item) => item.ColorName);
+"use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function getColors(product) {
+  const colorNames = product.Colors.map(item => item.ColorName);
   return colorNames.join(" + ");
 }
 
@@ -17,7 +23,7 @@ function setLocalStorage(key, data) {
   }
 }
 
-export default class ProductDetails {
+class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
@@ -27,9 +33,7 @@ export default class ProductDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails();
-    document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addToCart.bind(this));
+    document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
   }
 
   addToCart(e) {
@@ -39,19 +43,14 @@ export default class ProductDetails {
   renderProductDetails() {
     document.querySelector("#title").innerHTML += this.product.Brand.Name;
     document.querySelector("#brandName").innerHTML = this.product.Brand.Name;
-    document.querySelector(
-      "#productName"
-    ).innerHTML = this.product.NameWithoutBrand;
+    document.querySelector("#productName").innerHTML = this.product.NameWithoutBrand;
     document.querySelector("#productImage").src = this.product.Image;
     document.querySelector("#productImage").alt = this.product.Name;
-    document.querySelector(
-      ".product-card__price"
-    ).innerHTML += this.product.FinalPrice;
-    document.querySelector(".product__color").innerHTML = getColors(
-      this.product
-    );
-    document.querySelector(
-      ".product__description"
-    ).innerHTML = this.product.DescriptionHtmlSimple;
+    document.querySelector(".product-card__price").innerHTML += this.product.FinalPrice;
+    document.querySelector(".product__color").innerHTML = getColors(this.product);
+    document.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple;
   }
+
 }
+
+exports.default = ProductDetails;

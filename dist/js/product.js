@@ -1,15 +1,17 @@
-import ProductData from "./productData.js";
-import ProductDetails from "./productDetails.js";
-import { getParam } from "./utils.js";
+"use strict";
 
-const productId = getParam("product");
-const dataSource = new ProductData("tents");
+var _productData = _interopRequireDefault(require("./productData.js"));
 
-const product = new ProductDetails(productId, dataSource);
-product.init();
+var _productDetails = _interopRequireDefault(require("./productDetails.js"));
 
-// dataSource.findProductById(getParam('product')).then(data => console.log(data));
+var _utils = require("./utils.js");
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const productId = (0, _utils.getParam)("product");
+const dataSource = new _productData.default("tents");
+const product = new _productDetails.default(productId, dataSource);
+product.init(); // dataSource.findProductById(getParam('product')).then(data => console.log(data));
 // let products = [];
 // function convertToJson(res) {
 //   if (res.ok) {
@@ -18,7 +20,6 @@ product.init();
 //     throw new Error("Bad Response");
 //   }
 // }
-
 // function setLocalStorage(key, data) {
 //   if (localStorage.getItem("so-cart") == null) {
 //     let storage = [];
@@ -35,13 +36,11 @@ product.init();
 // async function getProductsDataAwait() {
 //   products = await fetch("../json/tents.json").then(convertToJson);
 // }
-
 // add to cart button event handler
 // function addToCart(e) {
 //   const product = products.find((item) => item.Id === e.target.dataset.id);
 //   setLocalStorage("so-cart", product);
 // }
-
 // get tents data
 // function getProductsData() {
 //   fetch("../json/tents.json")
@@ -50,7 +49,6 @@ product.init();
 //       products = data;
 //       });
 // }
-
 // getProductsData();
 // add listener to Add to Cart button
 // document.getElementById("addToCart").addEventListener("click", product.addToCart);
