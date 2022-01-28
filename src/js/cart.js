@@ -42,6 +42,7 @@ function renderCartTotal(cartList) {
   const element = document.querySelector('.cart-total');
   element.innerHTML += getCartTotal(cartList);
   element.parentElement.classList.remove("hide");
+}
   
 function removeFromCart(e) {
   e.preventDefault();
