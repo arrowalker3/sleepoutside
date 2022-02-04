@@ -5,16 +5,31 @@ function getColors(product) {
 }
 
 function setLocalStorage(key, data) {
-  if (localStorage.getItem("so-cart") == null) {
-    let storage = [];
-    storage.push(data);
-    localStorage.setItem(key, JSON.stringify(storage));
+  // Get the current storage
+  let storage = localStorage.getItem("so-cart");
+
+  // Make sure it's an array
+  if (storage == null) {
+    storage = [];
   } else {
-    let storage = localStorage.getItem("so-cart");
     storage = JSON.parse(storage);
-    storage.push(data);
-    localStorage.setItem(key, JSON.stringify(storage));
   }
+
+  // Check if id already exists in cart
+  let existingItemIndex = storage.findIndex(item => item.productId === data.productId);
+
+  // if not, push to cart with qty: 0
+  if (existingItemIndex === -1) {
+    data.qty = 0;
+    storage.push(data);
+    existingItemIndex = 0;
+  }
+
+  // qty += 1
+  storage[existingItemIndex].qty += 1;
+
+  // put back
+  localStorage.setItem(key, JSON.stringify(storage));
 }
 
 export default class ProductDetails {
