@@ -75,7 +75,11 @@ function renderCartItem(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: ${item.qty}</p>
+  <div class="cart-card__quantity">
+    <button id="subtract-quantity">-</button>
+    <p class="cart-card__quantity__display">qty: ${item.qty}</p>
+    <button id="add-quantity">+</button>
+  </div>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
   console.log(newItem);
