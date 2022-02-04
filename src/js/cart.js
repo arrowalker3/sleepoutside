@@ -16,14 +16,49 @@ function getCartContents() {
     renderCartTotal(cartItems);
 
     // Add event listeners to .cart-card__remove
-    const removeElements = [
-      ...document.getElementsByClassName("cart-card__remove"),
-    ];
-    removeElements.map((element) =>
-      element.addEventListener("click", removeFromCart)
-    );
+    addClickEvents("cart-card__remove", removeFromCart);
+    addClickEvents("add-quantity", addToQuantity);
+    addClickEvents("subtract-quantity", subtractFromQuantity);
   }
-  // document.querySelector(".product-list").innerHTML = renderCartItem(cartItems);
+}
+
+function addClickEvents(className, callback) {
+  // Get list of elements by class
+  const elementList = [
+    ...document.getElementsByClassName(className),
+  ];
+  
+  // Add click event to each
+  elementList.map((element) =>
+    element.addEventListener("click", callback)
+  );
+}
+
+function addToQuantity(e) {
+  // Add 1
+  const productId = e.target.getAttribute("data-id");
+  const cartItems = getLocalStorage("so-cart");
+
+  const product = cartItems.find(item => item.Id === productId);
+  product.qty += 1;
+
+  saveAndReload(cartItems);
+}
+
+function subtractFromQuantity(e) {
+  // Subtract 1
+  const productId = e.target.getAttribute("data-id");
+  const cartItems = getLocalStorage("so-cart");
+
+  const product = cartItems.find(item => item.Id === productId);
+  product.qty -= 1;
+
+  // If qty <== 0, delete
+  if(product.qty < 1) {
+    removeFromCart(e);
+  } else {
+    saveAndReload(cartItems);
+  }
 }
 
 function getCartTotal(cartList) {
@@ -33,7 +68,7 @@ function getCartTotal(cartList) {
   let total = 0;
 
   cartList.forEach((product) => {
-    total += product.FinalPrice;
+    total += (product.FinalPrice * product.qty);
   });
 
   return total.toFixed(2).toString();
@@ -58,7 +93,13 @@ function removeFromCart(e) {
   const cartItems = getLocalStorage("so-cart");
   const filteredList = cartItems.filter((item) => item.Id !== productId);
 
-  setLocalStorage("so-cart", filteredList);
+  // setLocalStorage("so-cart", filteredList);
+  // getCartContents();
+  saveAndReload(filteredList);
+}
+
+function saveAndReload(updatedCart) {
+  setLocalStorage("so-cart", updatedCart);
   getCartContents();
 }
 
@@ -76,9 +117,9 @@ function renderCartItem(item) {
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <div class="cart-card__quantity">
-    <button id="subtract-quantity">-</button>
+    <button class="subtract-quantity" data-id="${item.Id}">-</button>
     <p class="cart-card__quantity__display">qty: ${item.qty}</p>
-    <button id="add-quantity">+</button>
+    <button class="add-quantity" data-id="${item.Id}">+</button>
   </div>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
