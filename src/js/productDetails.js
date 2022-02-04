@@ -16,7 +16,9 @@ function setLocalStorage(key, data) {
   }
 
   // Check if id already exists in cart
-  let existingItemIndex = storage.findIndex(item => item.productId === data.productId);
+  let existingItemIndex = storage.findIndex(
+    (item) => item.productId === data.productId
+  );
 
   // if not, push to cart with qty: 0
   if (existingItemIndex === -1) {
@@ -49,6 +51,8 @@ export default class ProductDetails {
 
   addToCart(e) {
     setLocalStorage("so-cart", this.product);
+    var targetElement = document.getElementById("cart-icon");
+    targetElement.className = "cart animate";
   }
 
   renderProductDetails() {
