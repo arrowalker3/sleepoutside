@@ -16,15 +16,15 @@ function setLocalStorage(key, data) {
   }
 
   // Check if id already exists in cart
-  let existingItemIndex = storage.findIndex(
-    (item) => item.productId === data.productId
-  );
+
+  let existingItemIndex = storage.findIndex(item => item.Id === data.Id);
+
 
   // if not, push to cart with qty: 0
   if (existingItemIndex === -1) {
     data.qty = 0;
+    existingItemIndex = storage.length;
     storage.push(data);
-    existingItemIndex = 0;
   }
 
   // qty += 1
