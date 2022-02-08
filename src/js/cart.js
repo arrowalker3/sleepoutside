@@ -1,5 +1,5 @@
-import { loadHeaderFooter } from "./utils";
-import ShoppingCart from "./shoppingCart";
+import { loadHeaderFooter } from './utils';
+import ShoppingCart from './shoppingCart';
 
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -10,18 +10,18 @@ function setLocalStorage(key, data) {
 }
 
 function getCartContents() {
-  let markup = "";
-  const cartItems = getLocalStorage("so-cart");
+  let markup = '';
+  const cartItems = getLocalStorage('so-cart');
   if (cartItems != null) {
     const htmlItems = cartItems.map((item) => renderCartItem(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    document.querySelector('.product-list').innerHTML = htmlItems.join('');
 
     renderCartTotal(cartItems);
 
     // Add event listeners to .cart-card__remove
-    addClickEvents("cart-card__remove", removeFromCart);
-    addClickEvents("add-quantity", addToQuantity);
-    addClickEvents("subtract-quantity", subtractFromQuantity);
+    addClickEvents('cart-card__remove', removeFromCart);
+    addClickEvents('add-quantity', addToQuantity);
+    addClickEvents('subtract-quantity', subtractFromQuantity);
   }
 }
 
@@ -33,14 +33,14 @@ function addClickEvents(className, callback) {
   
   // Add click event to each
   elementList.map((element) =>
-    element.addEventListener("click", callback)
+    element.addEventListener('click', callback)
   );
 }
 
 function addToQuantity(e) {
   // Add 1
-  const productId = e.target.getAttribute("data-id");
-  const cartItems = getLocalStorage("so-cart");
+  const productId = e.target.getAttribute('data-id');
+  const cartItems = getLocalStorage('so-cart');
 
   const product = cartItems.find(item => item.Id === productId);
   product.qty += 1;
@@ -50,8 +50,8 @@ function addToQuantity(e) {
 
 function subtractFromQuantity(e) {
   // Subtract 1
-  const productId = e.target.getAttribute("data-id");
-  const cartItems = getLocalStorage("so-cart");
+  const productId = e.target.getAttribute('data-id');
+  const cartItems = getLocalStorage('so-cart');
 
   const product = cartItems.find(item => item.Id === productId);
   product.qty -= 1;
@@ -79,21 +79,21 @@ function getCartTotal(cartList) {
 
 function renderCartTotal(cartList) {
   // get element and set to total
-  const element = document.querySelector(".cart-total");
+  const element = document.querySelector('.cart-total');
   element.innerHTML = `$${getCartTotal(cartList)}`;
 
   if (cartList.length > 0) {
-    element.parentElement.classList.remove("hide");
+    element.parentElement.classList.remove('hide');
   } else {
-    element.parentElement.classList.add("hide");
+    element.parentElement.classList.add('hide');
   }
 }
 
 function removeFromCart(e) {
   e.preventDefault();
-  const productId = e.target.getAttribute("data-id");
+  const productId = e.target.getAttribute('data-id');
 
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage('so-cart');
   const filteredList = cartItems.filter((item) => item.Id !== productId);
 
   // setLocalStorage("so-cart", filteredList);
@@ -102,7 +102,7 @@ function removeFromCart(e) {
 }
 
 function saveAndReload(updatedCart) {
-  setLocalStorage("so-cart", updatedCart);
+  setLocalStorage('so-cart', updatedCart);
   getCartContents();
 }
 

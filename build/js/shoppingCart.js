@@ -1,6 +1,6 @@
 import { renderListWithTemplate } from "./utils.js";
 
-export default class ProductList {
+export default class ShoppingCart {
   constructor(category, dataSource, element) {
     this.category = category;
     this.dataSource = dataSource;

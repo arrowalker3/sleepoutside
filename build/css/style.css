@@ -4,6 +4,7 @@
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
+  --secondary-hover: #202306;
   --tertiary-color: #a4b8c4;
   --light-grey: #d0d0d0;
   --dark-grey: #303030;
@@ -95,6 +96,16 @@ button {
   border: 0;
   font-size: var(--large-font);
 }
+
+button:hover {
+  background-color: var(--secondary-hover);
+}
+
+button:active {
+  background-color: var(--tertiary-color);
+  color: black;
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
@@ -112,6 +123,36 @@ button {
 }
 .cart:hover svg {
   fill: gray;
+}
+
+.animate {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 /* End cart icon styles */
@@ -173,10 +214,11 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  grid-template-columns: 25% auto 15%;
+  grid-template-columns: 25% auto 20%;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  min-width: 80%;
 }
 
 .cart-card__remove {
@@ -214,8 +256,22 @@ button {
 }
 
 .cart-card__quantity {
-  grid-row: 1w;
+  grid-row: 1;
   grid-column: 3;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 1fr;
+}
+
+.cart-card__quantity * {
+  padding: 3px 2px;
+  line-height: 1.5em;
+  text-align: center;
+  min-width: 26px;
+}
+
+.cart-card__quantity__display {
+  margin: 0;
 }
 
 .cart-card__price {
