@@ -15,11 +15,11 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener('touchend', (event) => {
+  qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener('click', callback);
+  qs(selector).addEventListener("click", callback);
 }
 
 export function getParam(param) {
@@ -54,17 +54,17 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 
 export async function loadTemplate(path) {
   const html = await fetch(path).then((response) => response.text());
-  const template = document.createElement('template');
+  const template = document.createElement("template");
   template.innerHTML = html;
   return template;
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('../partials/header.html');
-  const footerTemplate = await loadTemplate('../partials/footer.html');
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
 
-  const domHeader = document.querySelector('#main-header');
-  const domFooter = document.querySelector('#main-footer');
+  const domHeader = document.querySelector("#main-header");
+  const domFooter = document.querySelector("#main-footer");
 
   renderWithTemplate(headerTemplate, domHeader);
   renderWithTemplate(footerTemplate, domFooter);

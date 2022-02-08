@@ -2,14 +2,14 @@ function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error('Bad Response');
+    throw new Error("Bad Response");
   }
 }
 
 export default class ProductData {
   constructor(categoryName) {
     this.category = categoryName;
-    this.path = `../json/${this.category}.json`;
+    this.path = `json/${this.category}.json`;
   }
 
   async findProductById(id) {

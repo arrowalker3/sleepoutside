@@ -11,16 +11,28 @@ function getColors(product) {
 }
 
 function setLocalStorage(key, data) {
-  if (localStorage.getItem("so-cart") == null) {
-    let storage = [];
-    storage.push(data);
-    localStorage.setItem(key, JSON.stringify(storage));
+  // Get the current storage
+  let storage = localStorage.getItem("so-cart"); // Make sure it's an array
+
+  if (storage == null) {
+    storage = [];
   } else {
-    let storage = localStorage.getItem("so-cart");
     storage = JSON.parse(storage);
+  } // Check if id already exists in cart
+
+
+  let existingItemIndex = storage.findIndex(item => item.Id === data.Id); // if not, push to cart with qty: 0
+
+  if (existingItemIndex === -1) {
+    data.qty = 0;
+    existingItemIndex = storage.length;
     storage.push(data);
-    localStorage.setItem(key, JSON.stringify(storage));
-  }
+  } // qty += 1
+
+
+  storage[existingItemIndex].qty += 1; // put back
+
+  localStorage.setItem(key, JSON.stringify(storage));
 }
 
 class ProductDetails {
@@ -38,6 +50,8 @@ class ProductDetails {
 
   addToCart(e) {
     setLocalStorage("so-cart", this.product);
+    var targetElement = document.getElementById("cart-icon");
+    targetElement.className = "cart animate";
   }
 
   renderProductDetails() {

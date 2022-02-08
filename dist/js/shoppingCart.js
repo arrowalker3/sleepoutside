@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _utils = require("./utils");
 
-class ProductList {
+class ShoppingCart {
   constructor(category, dataSource, element) {
     this.category = category;
     this.dataSource = dataSource;
@@ -32,4 +32,4 @@ class ProductList {
 
 }
 
-exports.default = ProductList;
+exports.default = ShoppingCart;

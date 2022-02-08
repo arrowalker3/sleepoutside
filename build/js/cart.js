@@ -27,14 +27,10 @@ function getCartContents() {
 
 function addClickEvents(className, callback) {
   // Get list of elements by class
-  const elementList = [
-    ...document.getElementsByClassName(className),
-  ];
-  
+  const elementList = [...document.getElementsByClassName(className)];
+
   // Add click event to each
-  elementList.map((element) =>
-    element.addEventListener("click", callback)
-  );
+  elementList.map((element) => element.addEventListener("click", callback));
 }
 
 function addToQuantity(e) {
@@ -42,7 +38,7 @@ function addToQuantity(e) {
   const productId = e.target.getAttribute("data-id");
   const cartItems = getLocalStorage("so-cart");
 
-  const product = cartItems.find(item => item.Id === productId);
+  const product = cartItems.find((item) => item.Id === productId);
   product.qty += 1;
 
   saveAndReload(cartItems);
@@ -53,11 +49,11 @@ function subtractFromQuantity(e) {
   const productId = e.target.getAttribute("data-id");
   const cartItems = getLocalStorage("so-cart");
 
-  const product = cartItems.find(item => item.Id === productId);
+  const product = cartItems.find((item) => item.Id === productId);
   product.qty -= 1;
 
   // If qty <== 0, delete
-  if(product.qty < 1) {
+  if (product.qty < 1) {
     removeFromCart(e);
   } else {
     saveAndReload(cartItems);
@@ -71,7 +67,7 @@ function getCartTotal(cartList) {
   let total = 0;
 
   cartList.forEach((product) => {
-    total += (product.FinalPrice * product.qty);
+    total += product.FinalPrice * product.qty;
   });
 
   return total.toFixed(2).toString();
