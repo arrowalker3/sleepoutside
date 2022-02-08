@@ -1,3 +1,6 @@
+import { loadHeaderFooter } from "./utils";
+import ShoppingCart from "./shoppingCart";
+
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
@@ -128,3 +131,4 @@ function renderCartItem(item) {
 }
 
 getCartContents();
+loadHeaderFooter();
