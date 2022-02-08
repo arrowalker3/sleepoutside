@@ -16,7 +16,7 @@ function convertToJson(res) {
 class ProductData {
   constructor(categoryName) {
     this.category = categoryName;
-    this.path = `json/${this.category}.json`;
+    this.path = `/json/${this.category}.json`;
   }
 
   async findProductById(id) {
