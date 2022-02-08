@@ -19,15 +19,6 @@ export default class ProductList {
     );
   }
 
-  //   renderList(list) {
-
-  //     list.forEach((product) => {
-  //       const clone = template.content.cloneNode(true);
-  //       const hydratedTemplate = this.prepareTemplate(clone, product);
-  //       this.listElement.appendChild(hydratedTemplate);
-  //     });
-  //   }
-
   prepareTemplate(clone, product) {
     clone.querySelector("#link").href += product.Id;
     clone.querySelector("#image").src = product.Image;
