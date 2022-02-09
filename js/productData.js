@@ -9,7 +9,7 @@ function convertToJson(res) {
 export default class ProductData {
   constructor(categoryName) {
     this.category = categoryName;
-    this.path = `/json/${this.category}.json`;
+    this.path = `/sleepoutside/json/${this.category}.json`;
   }
 
   async findProductById(id) {
