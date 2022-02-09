@@ -60,6 +60,7 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
+  console.log(window.location.pathname);
   const headerTemplate = await loadTemplate("/sleepoutside/partials/header.html");
   const footerTemplate = await loadTemplate("/sleepoutside/partials/footer.html");
 
