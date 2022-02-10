@@ -9,7 +9,7 @@ var _utils = require("./utils.js");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const productId = (0, _utils.getParam)("product");
-const dataSource = new _productData.default("tents");
+const dataSource = new _productData.default();
 const product = new _productDetails.default(productId, dataSource);
 product.init();
 (0, _utils.loadHeaderFooter)();

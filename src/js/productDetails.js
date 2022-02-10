@@ -1,3 +1,5 @@
+const baseURL = "http://157.201.228.93:2992/";
+
 function getColors(product) {
   const colorNames = product.Colors.map((item) => item.ColorName);
 
@@ -60,7 +62,9 @@ export default class ProductDetails {
     document.querySelector(
       "#productName"
     ).innerHTML = this.product.NameWithoutBrand;
-    document.querySelector("#productImage").src = this.product.Image;
+    document.querySelector(
+      "#productImage"
+    ).src = this.product.Images.PrimaryLarge;
     document.querySelector("#productImage").alt = this.product.Name;
     document.querySelector(
       ".product-card__price"

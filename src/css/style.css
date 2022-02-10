@@ -279,6 +279,11 @@ button:active {
   grid-column: 3;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
