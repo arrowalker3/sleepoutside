@@ -50,7 +50,10 @@ export default class ProductDetails {
 
   addToCart(e) {
     setLocalStorage("so-cart", this.product);
-    var targetElement = document.getElementById("cart-icon");
+    let targetElement = document.getElementById("cart-icon");
+    if (targetElement.className == "cart animate") {
+      targetElement.className = "cart";
+    }
     targetElement.className = "cart animate";
   }
 
