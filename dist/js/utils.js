@@ -12,6 +12,7 @@ exports.renderListWithTemplate = renderListWithTemplate;
 exports.renderWithTemplate = renderWithTemplate;
 exports.loadTemplate = loadTemplate;
 exports.loadHeaderFooter = loadHeaderFooter;
+exports.capitalizeFirstLetters = capitalizeFirstLetters;
 
 // wrapper for querySelector...returns matching element
 function qs(selector, parent = document) {
@@ -72,10 +73,20 @@ async function loadTemplate(path) {
 }
 
 async function loadHeaderFooter() {
+  console.log(window.location.pathname);
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
   const domHeader = document.querySelector("#main-header");
   const domFooter = document.querySelector("#main-footer");
   renderWithTemplate(headerTemplate, domHeader);
   renderWithTemplate(footerTemplate, domFooter);
+}
+
+function capitalizeFirstLetters(str) {
+  const words = str.split(" ");
+  const final = [];
+  words.forEach(word => {
+    final.push(word.charAt(0).toUpperCase() + word.slice([1]));
+  });
+  return final.join(" ");
 }
