@@ -7,7 +7,7 @@ module.exports = {
   },
   buildOptions: {
     out: "build",
-    baseUrl: "/sleepoutside/build/",
+    baseUrl: "/sleepoutside/",
     clean: true,
     htmlFragments: true,
   },
