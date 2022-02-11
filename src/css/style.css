@@ -323,9 +323,7 @@ button:active {
   grid-column: 3;
 }
 
-.cart-card
-
-.grid {
+.cart-card .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }

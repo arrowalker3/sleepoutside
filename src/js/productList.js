@@ -28,13 +28,16 @@ export default class ProductList {
     clone.querySelector(".product-card__price").innerText += product.FinalPrice;
 
     // Discount editing
-    const discount = getDiscount(product.SuggestedRetailPrice, product.FinalPrice);
-    const discountElement = clone.querySelector('.discount');
+    const discount = getDiscount(
+      product.SuggestedRetailPrice,
+      product.FinalPrice
+    );
+    const discountElement = clone.querySelector(".discount");
 
     if (discount === 0) {
-      discountElement.classList.add('hide');
+      discountElement.classList.add("hide");
     } else {
-      discountElement.innerHTML = discount + "% OFF!!!"
+      discountElement.innerHTML = discount + "% OFF!!!";
     }
     // End discount editing
 

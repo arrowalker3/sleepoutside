@@ -79,11 +79,14 @@ export default class ProductDetails {
     ).innerHTML = this.product.DescriptionHtmlSimple;
 
     // Discount editing
-    const discount = getDiscount(this.product.SuggestedRetailPrice, this.product.FinalPrice);
-    const discountElement = document.querySelector('.product-card__og-price');
+    const discount = getDiscount(
+      this.product.SuggestedRetailPrice,
+      this.product.FinalPrice
+    );
+    const discountElement = document.querySelector(".product-card__og-price");
 
     if (discount === 0) {
-      discountElement.classList.add('hide');
+      discountElement.classList.add("hide");
     } else {
       discountElement.innerHTML += this.product.SuggestedRetailPrice.toFixed(2);
     }

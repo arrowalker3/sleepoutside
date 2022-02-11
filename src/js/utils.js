@@ -92,6 +92,6 @@ export function getDiscount(listPrice, finalPrice) {
   const percent = (diff / listPrice) * 100;
 
   const roundDown = Math.floor(percent / 5) * 5;
-  
+
   return roundDown;
 }

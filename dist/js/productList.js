@@ -26,7 +26,18 @@ class ProductList {
     clone.querySelector("#image").alt += product.Name;
     clone.querySelector(".card__brand").innerText = product.Brand.Name;
     clone.querySelector(".card__name").innerText = product.NameWithoutBrand;
-    clone.querySelector(".product-card__price").innerText += product.FinalPrice;
+    clone.querySelector(".product-card__price").innerText += product.FinalPrice; // Discount editing
+
+    const discount = (0, _utils.getDiscount)(product.SuggestedRetailPrice, product.FinalPrice);
+    const discountElement = clone.querySelector(".discount");
+
+    if (discount === 0) {
+      discountElement.classList.add("hide");
+    } else {
+      discountElement.innerHTML = discount + "% OFF!!!";
+    } // End discount editing
+
+
     return clone;
   }
 

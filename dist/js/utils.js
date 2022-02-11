@@ -13,6 +13,7 @@ exports.renderWithTemplate = renderWithTemplate;
 exports.loadTemplate = loadTemplate;
 exports.loadHeaderFooter = loadHeaderFooter;
 exports.capitalizeFirstLetters = capitalizeFirstLetters;
+exports.getDiscount = getDiscount;
 
 // wrapper for querySelector...returns matching element
 function qs(selector, parent = document) {
@@ -80,7 +81,9 @@ async function loadHeaderFooter() {
   const domFooter = document.querySelector("#main-footer");
   renderWithTemplate(headerTemplate, domHeader);
   renderWithTemplate(footerTemplate, domFooter);
-}
+} // Separates words in string, then capitalizes first letter of each word
+// Returns a recombined string of the sentence
+
 
 function capitalizeFirstLetters(str) {
   const words = str.split(" ");
@@ -89,4 +92,13 @@ function capitalizeFirstLetters(str) {
     final.push(word.charAt(0).toUpperCase() + word.slice([1]));
   });
   return final.join(" ");
+} // Given 2 prices, returns % difference between the two,
+// rounded down to nearest multiple of 5
+
+
+function getDiscount(listPrice, finalPrice) {
+  const diff = listPrice - finalPrice;
+  const percent = diff / listPrice * 100;
+  const roundDown = Math.floor(percent / 5) * 5;
+  return roundDown;
 }

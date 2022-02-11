@@ -4,6 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _utils = require("./utils");
+
 const baseURL = "http://157.201.228.93:2992/";
 
 function getColors(product) {
@@ -63,7 +66,17 @@ class ProductDetails {
     document.querySelector("#productImage").alt = this.product.Name;
     document.querySelector(".product-card__price").innerHTML += this.product.FinalPrice;
     document.querySelector(".product__color").innerHTML = getColors(this.product);
-    document.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple;
+    document.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple; // Discount editing
+
+    const discount = (0, _utils.getDiscount)(this.product.SuggestedRetailPrice, this.product.FinalPrice);
+    const discountElement = document.querySelector(".product-card__og-price");
+
+    if (discount === 0) {
+      discountElement.classList.add("hide");
+    } else {
+      discountElement.innerHTML += this.product.SuggestedRetailPrice.toFixed(2);
+    } // End discount editing
+
   }
 
 }
