@@ -185,6 +185,7 @@ button:active {
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
+  position: relative;
 }
 .product-card h2,
 .product-card h3,
@@ -199,6 +200,36 @@ button:active {
 .card__name {
   font-size: 1em;
 }
+
+/* Discount shapes */
+.discount {
+  color: white;
+  background-color: red;
+  transform: rotate(35deg);
+  float: right;
+  position: absolute;
+  top: 25px;
+  right: -10px;
+  font-size: x-large;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+/* .discount::before, .discount::after {
+  content: '';
+  position:absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+}
+
+.discount::before {
+  transform: rotate(30deg);
+}
+
+.discount::after {
+  transform: rotate(60deg);
+} */
 /* End product list card */
 
 .product-detail {

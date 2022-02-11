@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils";
+import { renderListWithTemplate, getDiscount } from "./utils";
 
 export default class ProductList {
   constructor(category, dataSource, element) {
@@ -26,6 +26,17 @@ export default class ProductList {
     clone.querySelector(".card__brand").innerText = product.Brand.Name;
     clone.querySelector(".card__name").innerText = product.NameWithoutBrand;
     clone.querySelector(".product-card__price").innerText += product.FinalPrice;
+
+    // Discount editing
+    const discount = getDiscount(product.SuggestedRetailPrice, product.FinalPrice);
+    const discountElement = clone.querySelector('.discount');
+
+    if (discount === 0) {
+      discountElement.classList.add('hide');
+    } else {
+      discountElement.innerHTML = discount + "% OFF!!!"
+    }
+    // End discount editing
 
     return clone;
   }
