@@ -35,6 +35,23 @@ function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(storage));
 }
 
+function resetAnimation(target) {
+  target.classList.remove("animate");
+}
+
+function counter() {
+  let count = 0;
+  let storedItems = getLocalStorage("so-cart");
+  storedItems.forEach((item) => {
+    count += parseInt(item.qty);
+  });
+  return count;
+}
+
+function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
@@ -53,10 +70,12 @@ export default class ProductDetails {
   addToCart(e) {
     setLocalStorage("so-cart", this.product);
     let targetElement = document.getElementById("cart-icon");
-    if (targetElement.className == "cart animate") {
-      targetElement.className = "cart";
-    }
-    targetElement.className = "cart animate";
+    targetElement.classList.add("animate");
+    setTimeout(function () {
+      resetAnimation(targetElement);
+    }, 1000);
+
+    document.querySelector("#count").innerHTML = counter();
   }
 
   renderProductDetails() {

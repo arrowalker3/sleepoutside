@@ -69,6 +69,20 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, domHeader);
   renderWithTemplate(footerTemplate, domFooter);
+
+  function counter() {
+    let count = 0;
+    let storedItems = getLocalStorage("so-cart");
+    storedItems.forEach((item) => {
+      count += parseInt(item.qty);
+    });
+    return count;
+  }
+
+  function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+  document.querySelector("#count").innerHTML = counter();
 }
 
 export function capitalizeFirstLetters(str) {

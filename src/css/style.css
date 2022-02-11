@@ -155,6 +155,18 @@ button:active {
   }
 }
 
+#count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  font-size: small;
+  text-align: center;
+  right: 20px;
+  bottom: 15px;
+  /* padding: 2px; */
+}
+
 /* End cart icon styles */
 
 .mission {
