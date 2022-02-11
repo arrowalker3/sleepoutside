@@ -60,6 +60,7 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
+  console.log(window.location.pathname);
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
 
@@ -68,4 +69,15 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, domHeader);
   renderWithTemplate(footerTemplate, domFooter);
+}
+
+export function capitalizeFirstLetters(str) {
+  const words = str.split(" ");
+  const final = [];
+
+  words.forEach((word) => {
+    final.push(word.charAt(0).toUpperCase() + word.slice([1]));
+  });
+
+  return final.join(" ");
 }
