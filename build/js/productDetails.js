@@ -1,3 +1,5 @@
+import { getDiscount } from "./utils.js";
+
 const baseURL = "http://157.201.228.93:2992/";
 
 function getColors(product) {
@@ -35,6 +37,23 @@ function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(storage));
 }
 
+function resetAnimation(target) {
+  target.classList.remove("animate");
+}
+
+function counter() {
+  let count = 0;
+  let storedItems = getLocalStorage("so-cart");
+  storedItems.forEach((item) => {
+    count += parseInt(item.qty);
+  });
+  return count;
+}
+
+function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
@@ -52,8 +71,13 @@ export default class ProductDetails {
 
   addToCart(e) {
     setLocalStorage("so-cart", this.product);
-    var targetElement = document.getElementById("cart-icon");
-    targetElement.className = "cart animate";
+    let targetElement = document.getElementById("cart-icon");
+    targetElement.classList.add("animate");
+    setTimeout(function () {
+      resetAnimation(targetElement);
+    }, 1000);
+
+    document.querySelector("#count").innerHTML = counter();
   }
 
   renderProductDetails() {
@@ -75,5 +99,19 @@ export default class ProductDetails {
     document.querySelector(
       ".product__description"
     ).innerHTML = this.product.DescriptionHtmlSimple;
+
+    // Discount editing
+    const discount = getDiscount(
+      this.product.SuggestedRetailPrice,
+      this.product.FinalPrice
+    );
+    const discountElement = document.querySelector(".product-card__og-price");
+
+    if (discount === 0) {
+      discountElement.classList.add("hide");
+    } else {
+      discountElement.innerHTML += this.product.SuggestedRetailPrice.toFixed(2);
+    }
+    // End discount editing
   }
 }

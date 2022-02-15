@@ -44,7 +44,7 @@ export function renderListWithTemplate(
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  const clone = template.content.cloneNode(true);
+  let clone = template.content.cloneNode(true);
 
   if (callback != null) {
     clone = callback(clone, data);
@@ -85,6 +85,8 @@ export async function loadHeaderFooter() {
   document.querySelector("#count").innerHTML = counter();
 }
 
+// Separates words in string, then capitalizes first letter of each word
+// Returns a recombined string of the sentence
 export function capitalizeFirstLetters(str) {
   const words = str.split(" ");
   const final = [];
@@ -107,4 +109,15 @@ export function getCartTotal(cartList) {
   });
 
   return total.toFixed(2).toString();
+  // Given 2 prices, returns % difference between the two,
+  // rounded down to nearest multiple of 5
+  export function getDiscount(listPrice, finalPrice) {
+    const diff = listPrice - finalPrice;
+
+    const percent = (diff / listPrice) * 100;
+
+    const roundDown = Math.floor(percent / 5) * 5;
+
+    return roundDown;
+  }
 }
