@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+  value: true,
 });
 exports.default = void 0;
 const baseURL = "http://157.201.228.93:2992/";
@@ -14,19 +14,22 @@ function convertToJson(res) {
   }
 }
 
-class ProductData {
+class ExternalServices {
   constructor() {}
 
   async findProductById(id) {
     // const products = await this.getData();
     // return products.find((item) => item.Id === id);
-    return fetch(baseURL + `product/${id}`).then(convertToJson).then(data => data.Result);
+    return fetch(baseURL + `product/${id}`)
+      .then(convertToJson)
+      .then((data) => data.Result);
   }
 
   getData(category) {
-    return fetch(baseURL + `products/search/${category}`).then(convertToJson).then(data => data.Result);
+    return fetch(baseURL + `products/search/${category}`)
+      .then(convertToJson)
+      .then((data) => data.Result);
   }
-
 }
 
-exports.default = ProductData;
+exports.default = ExternalServices;

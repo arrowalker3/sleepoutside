@@ -2,9 +2,9 @@
 
 var _utils = require("./utils.js");
 
-// import ProductData from "./productData.js";
+// import ExternalServices from "./externalServices.js";
 // import ProductList from "./productList.js";
-// const dataSource = new ProductData("tents");
+// const dataSource = new ExternalServices("tents");
 // const productList = new ProductList(
 //   "tents",
 //   dataSource,

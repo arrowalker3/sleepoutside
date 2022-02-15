@@ -224,6 +224,11 @@ button:active {
 }
 
 /* Start cart list card styles */
+
+#checkout-link {
+  color: white;
+  text-decoration: none;
+}
 .cart-card {
   display: grid;
   grid-template-columns: 25% auto 20%;

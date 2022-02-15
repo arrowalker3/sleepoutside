@@ -1,4 +1,5 @@
 import { loadHeaderFooter } from "./utils";
+import { getCartTotal } from "./utils";
 import ShoppingCart from "./shoppingCart";
 
 function getLocalStorage(key) {
@@ -60,18 +61,18 @@ function subtractFromQuantity(e) {
   }
 }
 
-function getCartTotal(cartList) {
-  // foreach item,
-  // add to total
-  // return cart total
-  let total = 0;
+// export function getCartTotal(cartList) {
+//   // foreach item,
+//   // add to total
+//   // return cart total
+//   let total = 0;
 
-  cartList.forEach((product) => {
-    total += product.FinalPrice * product.qty;
-  });
+//   cartList.forEach((product) => {
+//     total += product.FinalPrice * product.qty;
+//   });
 
-  return total.toFixed(2).toString();
-}
+//   return total.toFixed(2).toString();
+// }
 
 function renderCartTotal(cartList) {
   // get element and set to total
