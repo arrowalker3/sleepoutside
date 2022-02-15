@@ -1,3 +1,5 @@
+import { getDiscount } from "./utils";
+
 const baseURL = "http://157.201.228.93:2992/";
 
 function getColors(product) {
@@ -97,5 +99,19 @@ export default class ProductDetails {
     document.querySelector(
       ".product__description"
     ).innerHTML = this.product.DescriptionHtmlSimple;
+
+    // Discount editing
+    const discount = getDiscount(
+      this.product.SuggestedRetailPrice,
+      this.product.FinalPrice
+    );
+    const discountElement = document.querySelector(".product-card__og-price");
+
+    if (discount === 0) {
+      discountElement.classList.add("hide");
+    } else {
+      discountElement.innerHTML += this.product.SuggestedRetailPrice.toFixed(2);
+    }
+    // End discount editing
   }
 }
