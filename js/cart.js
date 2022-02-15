@@ -1,130 +1,19 @@
-import { loadHeaderFooter } from "./utils.js";
-import ShoppingCart from "./shoppingCart.js";
-
-function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
-}
-
-function setLocalStorage(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
-
-function getCartContents() {
-  let markup = "";
-  const cartItems = getLocalStorage("so-cart");
-  if (cartItems != null) {
-    const htmlItems = cartItems.map((item) => renderCartItem(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
-
-    renderCartTotal(cartItems);
-
-    // Add event listeners to .cart-card__remove
-    addClickEvents("cart-card__remove", removeFromCart);
-    addClickEvents("add-quantity", addToQuantity);
-    addClickEvents("subtract-quantity", subtractFromQuantity);
-  }
-}
-
-function addClickEvents(className, callback) {
-  // Get list of elements by class
-  const elementList = [...document.getElementsByClassName(className)];
-
-  // Add click event to each
-  elementList.map((element) => element.addEventListener("click", callback));
-}
-
-function addToQuantity(e) {
-  // Add 1
-  const productId = e.target.getAttribute("data-id");
-  const cartItems = getLocalStorage("so-cart");
-
-  const product = cartItems.find((item) => item.Id === productId);
-  product.qty += 1;
-
-  saveAndReload(cartItems);
-}
-
-function subtractFromQuantity(e) {
-  // Subtract 1
-  const productId = e.target.getAttribute("data-id");
-  const cartItems = getLocalStorage("so-cart");
-
-  const product = cartItems.find((item) => item.Id === productId);
-  product.qty -= 1;
-
-  // If qty <== 0, delete
-  if (product.qty < 1) {
-    removeFromCart(e);
-  } else {
-    saveAndReload(cartItems);
-  }
-}
-
-function getCartTotal(cartList) {
-  // foreach item,
-  // add to total
-  // return cart total
-  let total = 0;
-
-  cartList.forEach((product) => {
-    total += product.FinalPrice * product.qty;
-  });
-
-  return total.toFixed(2).toString();
-}
-
-function renderCartTotal(cartList) {
-  // get element and set to total
-  const element = document.querySelector(".cart-total");
-  element.innerHTML = `$${getCartTotal(cartList)}`;
-
-  if (cartList.length > 0) {
-    element.parentElement.classList.remove("hide");
-  } else {
-    element.parentElement.classList.add("hide");
-  }
-}
-
-function removeFromCart(e) {
-  e.preventDefault();
-  const productId = e.target.getAttribute("data-id");
-
-  const cartItems = getLocalStorage("so-cart");
-  const filteredList = cartItems.filter((item) => item.Id !== productId);
-
-  // setLocalStorage("so-cart", filteredList);
-  // getCartContents();
-  saveAndReload(filteredList);
-}
-
-function saveAndReload(updatedCart) {
-  setLocalStorage("so-cart", updatedCart);
-  getCartContents();
-}
-
-function renderCartItem(item) {
-  const newItem = `<li class="cart-card divider">
+import{loadHeaderFooter as l}from"./utils.js";import"./shoppingCart.js";function n(t){return JSON.parse(localStorage.getItem(t))}function u(t,a){localStorage.setItem(t,JSON.stringify(a))}function d(){let t="";const a=n("so-cart");if(a!=null){const e=a.map(r=>_(r));document.querySelector(".product-list").innerHTML=e.join(""),g(a),o("cart-card__remove",i),o("add-quantity",m),o("subtract-quantity",p)}}function o(t,a){const e=[...document.getElementsByClassName(t)];e.map(r=>r.addEventListener("click",a))}function m(t){const a=t.target.getAttribute("data-id"),e=n("so-cart"),r=e.find(c=>c.Id===a);r.qty+=1,s(e)}function p(t){const a=t.target.getAttribute("data-id"),e=n("so-cart"),r=e.find(c=>c.Id===a);r.qty-=1,r.qty<1?i(t):s(e)}function f(t){let a=0;return t.forEach(e=>{a+=e.FinalPrice*e.qty}),a.toFixed(2).toString()}function g(t){const a=document.querySelector(".cart-total");a.innerHTML=`$${f(t)}`,t.length>0?a.parentElement.classList.remove("hide"):a.parentElement.classList.add("hide")}function i(t){t.preventDefault();const a=t.target.getAttribute("data-id"),e=n("so-cart"),r=e.filter(c=>c.Id!==a);s(r)}function s(t){u("so-cart",t),d()}function _(t){const a=`<li class="cart-card divider">
   <a href="#" class="cart-card__image">
-    <span class="cart-card__remove" data-id="${item.Id}">X</span>
+    <span class="cart-card__remove" data-id="${t.Id}">X</span>
     <img
-      src="${item.Image}"
-      alt="${item.Name}"
+      src="${t.Image}"
+      alt="${t.Name}"
     />
   </a>
   <a href="#" class="cart-card__name">
-    <h2 class="card__name">${item.Name}</h2>
+    <h2 class="card__name">${t.Name}</h2>
   </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__color">${t.Colors[0].ColorName}</p>
   <div class="cart-card__quantity">
-    <button class="subtract-quantity" data-id="${item.Id}">-</button>
-    <p class="cart-card__quantity__display">qty: ${item.qty}</p>
-    <button class="add-quantity" data-id="${item.Id}">+</button>
+    <button class="subtract-quantity" data-id="${t.Id}">-</button>
+    <p class="cart-card__quantity__display">qty: ${t.qty}</p>
+    <button class="add-quantity" data-id="${t.Id}">+</button>
   </div>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
-  console.log(newItem);
-  return newItem;
-}
-
-getCartContents();
-loadHeaderFooter();
+  <p class="cart-card__price">$${t.FinalPrice}</p>
+</li>`;return console.log(a),a}d(),l();

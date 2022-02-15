@@ -1,12 +1,1 @@
-import ProductData from "./productData.js";
-import ProductDetails from "./productDetails.js";
-import { getParam } from "./utils.js";
-import { loadHeaderFooter } from "./utils.js";
-
-const productId = getParam("product");
-const dataSource = new ProductData();
-
-const product = new ProductDetails(productId, dataSource);
-product.init();
-
-loadHeaderFooter();
+import t from"./productData.js";import o from"./productDetails.js";import{getParam as r}from"./utils.js";import{loadHeaderFooter as a}from"./utils.js";const c=r("product"),d=new t,s=new o(c,d);s.init(),a();
