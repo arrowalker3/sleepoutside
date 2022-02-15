@@ -82,6 +82,11 @@ header {
 .logo--square > div {
   margin-top: -1.7em;
 }
+
+.category-icon {
+  height: 150px;
+  width: 150px;
+}
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
