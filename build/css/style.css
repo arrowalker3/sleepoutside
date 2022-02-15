@@ -82,6 +82,11 @@ header {
 .logo--square > div {
   margin-top: -1.7em;
 }
+
+.category-icon {
+  height: 150px;
+  width: 150px;
+}
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -155,6 +160,18 @@ button:active {
   }
 }
 
+#count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  font-size: small;
+  text-align: center;
+  right: 20px;
+  bottom: 15px;
+  /* padding: 2px; */
+}
+
 /* End cart icon styles */
 
 .mission {
@@ -185,11 +202,25 @@ button:active {
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
+  position: relative;
 }
 .product-card h2,
 .product-card h3,
 .product-card p {
   margin: 0.5em 0;
+}
+
+.product-card__price {
+  font-size: x-large;
+}
+
+.product-card__og-price {
+  font-size: medium;
+  color: #5e6472;
+  text-decoration: line-through;
+  margin-left: 4px;
+  position: relative;
+  bottom: 6px;
 }
 
 .card__brand {
@@ -199,6 +230,36 @@ button:active {
 .card__name {
   font-size: 1em;
 }
+
+/* Discount shapes */
+.discount {
+  color: white;
+  background-color: red;
+  transform: rotate(35deg);
+  float: right;
+  position: absolute;
+  top: 25px;
+  right: -10px;
+  font-size: x-large;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+/* .discount::before, .discount::after {
+  content: '';
+  position:absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+}
+
+.discount::before {
+  transform: rotate(30deg);
+}
+
+.discount::after {
+  transform: rotate(60deg);
+} */
 /* End product list card */
 
 .product-detail {
@@ -279,7 +340,7 @@ button:active {
   grid-column: 3;
 }
 
-.grid {
+.cart-card .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
