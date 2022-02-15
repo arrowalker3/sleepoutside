@@ -95,3 +95,16 @@ export function capitalizeFirstLetters(str) {
 
   return final.join(" ");
 }
+
+export function getCartTotal(cartList) {
+  // foreach item,
+  // add to total
+  // return cart total
+  let total = 0;
+
+  cartList.forEach((product) => {
+    total += product.FinalPrice * product.qty;
+  });
+
+  return total.toFixed(2).toString();
+}
