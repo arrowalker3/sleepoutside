@@ -13,7 +13,7 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
-      <form action="">
+      <form >
         <fieldset style="width:300px">
           <legend>Shipping</legend>
           <label for="fname">First Name</label><br />
@@ -32,12 +32,12 @@
         <fieldset style="width:300px">
           <legend>Payment</legend>
     
-          <label for="card-num">First Name</label><br />
-          <input type="text" name="card-num" id="card-num"><br />
-          <label for="expire">Last Name</label><br />
-          <input type="text" name="expire" id="expire"><br />
-          <label for="security-code">Street</label><br />
-          <input type="text" name="security-code" id="security-code">
+          <label for="card-num">Card Number</label><br />
+          <input type="text" name="cardNumber" id="card-num"><br />
+          <label for="expire">Expiration Date</label><br />
+          <input type="text" name="expiration" id="expire"><br />
+          <label for="security-code">Security Code</label><br />
+          <input type="text" name="code" id="security-code">
         </fieldset>
         <fieldset id="order-sum" style="width:300px">
           <legend>Order Summary</legend>
@@ -47,6 +47,7 @@
             <span id="shipping-estimate">Shipping Estimate: </span><br />
             <span id="tax">Tax: </span>
           </div>
+          <button id="checkoutSubmit" type="submit">Checkout</button>
       </form>
         
       </fieldset>
