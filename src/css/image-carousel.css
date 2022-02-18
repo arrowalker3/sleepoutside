@@ -8,8 +8,8 @@
 }
 
 /* Hide the images by default */
-.image-carousel__image {
-  display: none;
+.myImages {
+  display: block;
 }
 
 /* Next & previous buttons */
@@ -20,7 +20,7 @@
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: white;
+  color: grey;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;

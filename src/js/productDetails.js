@@ -1,4 +1,5 @@
-import { getDiscount, renderListWithTemplate } from "./utils";
+import { getDiscount, renderListWithTemplate } from "./utils.js";
+import SlideController from "./slideController.js";
 
 const baseURL = "//157.201.228.93:2992/";
 
@@ -63,10 +64,6 @@ function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
-window.plusSlides = function (n) {
-  console.log(n);
-}
-
 /**
  * PRODUCT DETAILS CLASS
  * 
@@ -77,6 +74,8 @@ export default class ProductDetails {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
+    this.slideController = new SlideController();
+    this.slideController.init();
   }
 
   async init() {
@@ -106,7 +105,7 @@ export default class ProductDetails {
     ).innerHTML = this.product.NameWithoutBrand;
     
     // Fill image carousel
-    this.fillImages();
+    this.fillImages(this.product);
     // End image carousel
 
     document.querySelector(
@@ -147,6 +146,8 @@ export default class ProductDetails {
       document.querySelector("#image-carousel"),
       imageList,
       imageCarouselCallback.bind(this)
-      );
+    );
+
+    this.slideController.primeSlideController(".myImages");
   }
 }
