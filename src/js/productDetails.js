@@ -1,8 +1,6 @@
 import { getDiscount, renderListWithTemplate } from "./utils.js";
 import SlideController from "./slideController.js";
 
-const baseURL = "//157.201.228.93:2992/";
-
 function getColors(product) {
   const colorNames = product.Colors.map((item) => item.ColorName);
 
@@ -66,7 +64,7 @@ function getLocalStorage(key) {
 
 /**
  * PRODUCT DETAILS CLASS
- * 
+ *
  * Manages and fills out details on the page for an individual product
  */
 export default class ProductDetails {
@@ -86,7 +84,7 @@ export default class ProductDetails {
       .addEventListener("click", this.addToCart.bind(this));
   }
 
-  addToCart(e) {
+  addToCart() {
     setLocalStorage("so-cart", this.product);
     let targetElement = document.getElementById("cart-icon");
     targetElement.classList.add("animate");
@@ -103,7 +101,7 @@ export default class ProductDetails {
     document.querySelector(
       "#productName"
     ).innerHTML = this.product.NameWithoutBrand;
-    
+
     // Fill image carousel
     this.fillImages(this.product);
     // End image carousel
@@ -135,7 +133,9 @@ export default class ProductDetails {
 
   fillImages() {
     // Create list of images to add to the carousel
-    const imageList = [{ Title: this.product.Name, Src: this.product.Images.PrimaryLarge }];
+    const imageList = [
+      { Title: this.product.Name, Src: this.product.Images.PrimaryLarge },
+    ];
     if (this.product.Images.ExtraImages) {
       Array.prototype.push.apply(imageList, this.product.Images.ExtraImages);
     }

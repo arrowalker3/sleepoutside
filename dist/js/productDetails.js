@@ -5,9 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _utils = require("./utils");
+var _utils = require("./utils.js");
 
-const baseURL = "http://157.201.228.93:2992/";
+var _slideController = _interopRequireDefault(require("./slideController.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getColors(product) {
   const colorNames = product.Colors.map(item => item.ColorName);
@@ -39,11 +41,44 @@ function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(storage));
 }
 
+function resetAnimation(target) {
+  target.classList.remove("animate");
+}
+
+function counter() {
+  let count = 0;
+  let storedItems = getLocalStorage("so-cart");
+  storedItems.forEach(item => {
+    count += parseInt(item.qty);
+  });
+  return count;
+}
+
+function imageCarouselCallback(clone, imageData) {
+  // Set the src to url and alt to name of product
+  const imageElement = clone.querySelector(".image-actual");
+  imageElement.src = imageData.Src;
+  imageElement.alt = imageData.Title;
+  return clone;
+}
+
+function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+/**
+ * PRODUCT DETAILS CLASS
+ *
+ * Manages and fills out details on the page for an individual product
+ */
+
+
 class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
+    this.slideController = new _slideController.default();
+    this.slideController.init();
   }
 
   async init() {
@@ -52,18 +87,23 @@ class ProductDetails {
     document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
   }
 
-  addToCart(e) {
+  addToCart() {
     setLocalStorage("so-cart", this.product);
-    var targetElement = document.getElementById("cart-icon");
-    targetElement.className = "cart animate";
+    let targetElement = document.getElementById("cart-icon");
+    targetElement.classList.add("animate");
+    setTimeout(function () {
+      resetAnimation(targetElement);
+    }, 1000);
+    document.querySelector("#count").innerHTML = counter();
   }
 
   renderProductDetails() {
     document.querySelector("#title").innerHTML += this.product.Brand.Name;
     document.querySelector("#brandName").innerHTML = this.product.Brand.Name;
-    document.querySelector("#productName").innerHTML = this.product.NameWithoutBrand;
-    document.querySelector("#productImage").src = this.product.Images.PrimaryLarge;
-    document.querySelector("#productImage").alt = this.product.Name;
+    document.querySelector("#productName").innerHTML = this.product.NameWithoutBrand; // Fill image carousel
+
+    this.fillImages(this.product); // End image carousel
+
     document.querySelector(".product-card__price").innerHTML += this.product.FinalPrice;
     document.querySelector(".product__color").innerHTML = getColors(this.product);
     document.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple; // Discount editing
@@ -77,6 +117,22 @@ class ProductDetails {
       discountElement.innerHTML += this.product.SuggestedRetailPrice.toFixed(2);
     } // End discount editing
 
+  }
+
+  fillImages() {
+    // Create list of images to add to the carousel
+    const imageList = [{
+      Title: this.product.Name,
+      Src: this.product.Images.PrimaryLarge
+    }];
+
+    if (this.product.Images.ExtraImages) {
+      Array.prototype.push.apply(imageList, this.product.Images.ExtraImages);
+    } // Render images using carousel template
+
+
+    (0, _utils.renderListWithTemplate)(document.querySelector("#image-template"), document.querySelector("#image-carousel"), imageList, imageCarouselCallback.bind(this));
+    this.slideController.primeSlideController(".myImages");
   }
 
 }

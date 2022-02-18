@@ -60,7 +60,7 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  console.log(window.location.pathname);
+  // console.log(window.location.pathname);
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
 
@@ -79,9 +79,9 @@ export async function loadHeaderFooter() {
     return count;
   }
 
-  function getLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
-  }
+  // function getLocalStorage(key) {
+  //   return JSON.parse(localStorage.getItem(key));
+  // }
   document.querySelector("#count").innerHTML = counter();
 }
 

@@ -1,6 +1,6 @@
 import { loadHeaderFooter } from "./utils";
 import { getCartTotal } from "./utils";
-import ShoppingCart from "./shoppingCart";
+// import ShoppingCart from './shoppingCart';
 
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -11,7 +11,7 @@ function setLocalStorage(key, data) {
 }
 
 function getCartContents() {
-  let markup = "";
+  // let markup = '';
   const cartItems = getLocalStorage("so-cart");
   if (cartItems != null) {
     const htmlItems = cartItems.map((item) => renderCartItem(item));
@@ -123,7 +123,7 @@ function renderCartItem(item) {
   </div>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
-  console.log(newItem);
+  // console.log(newItem);
   return newItem;
 }
 
