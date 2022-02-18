@@ -109,15 +109,15 @@ export function getCartTotal(cartList) {
   });
 
   return total.toFixed(2).toString();
-  // Given 2 prices, returns % difference between the two,
-  // rounded down to nearest multiple of 5
-  export function getDiscount(listPrice, finalPrice) {
-    const diff = listPrice - finalPrice;
+}
+// Given 2 prices, returns % difference between the two,
+// rounded down to nearest multiple of 5
+export function getDiscount(listPrice, finalPrice) {
+  const diff = listPrice - finalPrice;
 
-    const percent = (diff / listPrice) * 100;
+  const percent = (diff / listPrice) * 100;
 
-    const roundDown = Math.floor(percent / 5) * 5;
+  const roundDown = Math.floor(percent / 5) * 5;
 
-    return roundDown;
-  }
+  return roundDown;
 }
