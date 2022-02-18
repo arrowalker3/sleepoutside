@@ -108,7 +108,7 @@ function renderCartItem(item) {
   <a href="#" class="cart-card__image">
     <span class="cart-card__remove" data-id="${item.Id}">X</span>
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimarySmall}"
       alt="${item.Name}"
     />
   </a>
