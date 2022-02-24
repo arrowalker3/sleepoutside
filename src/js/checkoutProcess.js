@@ -40,6 +40,7 @@ export default class CheckoutProcess {
   subtotal() {
     document.querySelector("#item-amount").innerHTML += this.numberOfItems;
     document.querySelector("#item-cost").innerHTML = this.cartTotal;
+    this.taxAndTotal();
   }
 
   taxAndTotal() {
@@ -53,12 +54,14 @@ export default class CheckoutProcess {
     // build the data object from the calculated fields, the items in the cart, and the information entered into the form
 
     // call the checkout method in our ExternalServices module and send it our data object.
+
     const formElement = document.forms["checkout"];
 
     const json = formDataToJSON(formElement);
     // add totals, and item details
+
     json.orderDate = new Date();
-    json.orderTotal = this.orderTotal;
+    json.orderTotal = this.cartTotal;
     json.tax = this.tax;
     json.shipping = this.shipping;
     json.items = packageItems(this.cartItems);

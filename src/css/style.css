@@ -83,6 +83,21 @@ header {
   margin-top: -1.7em;
 }
 
+#news-form {
+  position: absolute;
+  top: 180px;
+  left: 230px;
+  background-image: radial-gradient(
+    ellipse farthest-corner at 45px 45px,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.2)
+  );
+}
+
+#news-form fieldset {
+  margin: 0;
+  padding: 0;
+}
 .category-icon {
   height: 150px;
   width: 150px;
