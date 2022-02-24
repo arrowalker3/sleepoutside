@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="title">Sleep Outside |</title>
+    <link rel="stylesheet" href="../css/image-carousel.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/product.js" type="module"></script>
   </head>
@@ -13,7 +14,25 @@
       <section class="product-detail">
         <h3 id="brandName">Brand Name</h3>
         <h2 id="productName" class="divider">Product Name</h2>
-        <img id="productImage" class="divider" src="" alt="Product Name" />
+
+        <!-- Image Carousel start -->
+        <div id="image-carousel__container" class="divider image-carousel">
+          <!-- <img id="productImage" src="" alt="Product Name" /> -->
+
+          <div id="image-carousel"></div>
+
+          <template id="image-template">
+            <div class="myImages fade hide">
+              <img class="image-actual" src="" alt="Product Name" />
+            </div>
+          </template>
+
+          <!-- Next and previous buttons -->
+          <a class="arrows prev hide">&#10094;</a>
+          <a class="arrows next hide">&#10095;</a>
+        </div>
+        <!-- Carousel code and styles started from https://www.w3schools.com/howto/howto_js_slideshow.asp -->
+        <!-- Image Carousel end -->
 
         <span class="product-card__price">$</span>
         <span class="product-card__og-price">$</span>

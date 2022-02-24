@@ -2,10 +2,7 @@
 
 var _utils = require("./utils");
 
-var _shoppingCart = _interopRequireDefault(require("./shoppingCart"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+// import ShoppingCart from './shoppingCart';
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
@@ -15,7 +12,7 @@ function setLocalStorage(key, data) {
 }
 
 function getCartContents() {
-  let markup = "";
+  // let markup = '';
   const cartItems = getLocalStorage("so-cart");
 
   if (cartItems != null) {
@@ -57,23 +54,22 @@ function subtractFromQuantity(e) {
   } else {
     saveAndReload(cartItems);
   }
-}
+} // export function getCartTotal(cartList) {
+//   // foreach item,
+//   // add to total
+//   // return cart total
+//   let total = 0;
+//   cartList.forEach((product) => {
+//     total += product.FinalPrice * product.qty;
+//   });
+//   return total.toFixed(2).toString();
+// }
 
-function getCartTotal(cartList) {
-  // foreach item,
-  // add to total
-  // return cart total
-  let total = 0;
-  cartList.forEach(product => {
-    total += product.FinalPrice * product.qty;
-  });
-  return total.toFixed(2).toString();
-}
 
 function renderCartTotal(cartList) {
   // get element and set to total
   const element = document.querySelector(".cart-total");
-  element.innerHTML = `$${getCartTotal(cartList)}`;
+  element.innerHTML = `$${(0, _utils.getCartTotal)(cartList)}`;
 
   if (cartList.length > 0) {
     element.parentElement.classList.remove("hide");
@@ -116,8 +112,8 @@ function renderCartItem(item) {
     <button class="add-quantity" data-id="${item.Id}">+</button>
   </div>
   <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
-  console.log(newItem);
+</li>`; // console.log(newItem);
+
   return newItem;
 }
 

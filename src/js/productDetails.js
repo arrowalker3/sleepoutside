@@ -1,6 +1,5 @@
-import { getDiscount } from "./utils";
-
-const baseURL = "http://157.201.228.93:2992/";
+import { getDiscount, renderListWithTemplate } from "./utils.js";
+import SlideController from "./slideController.js";
 
 function getColors(product) {
   const colorNames = product.Colors.map((item) => item.ColorName);
@@ -50,15 +49,31 @@ function counter() {
   return count;
 }
 
+function imageCarouselCallback(clone, imageData) {
+  // Set the src to url and alt to name of product
+  const imageElement = clone.querySelector(".image-actual");
+  imageElement.src = imageData.Src;
+  imageElement.alt = imageData.Title;
+
+  return clone;
+}
+
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
+/**
+ * PRODUCT DETAILS CLASS
+ *
+ * Manages and fills out details on the page for an individual product
+ */
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
+    this.slideController = new SlideController();
+    this.slideController.init();
   }
 
   async init() {
@@ -69,7 +84,7 @@ export default class ProductDetails {
       .addEventListener("click", this.addToCart.bind(this));
   }
 
-  addToCart(e) {
+  addToCart() {
     setLocalStorage("so-cart", this.product);
     let targetElement = document.getElementById("cart-icon");
     targetElement.classList.add("animate");
@@ -86,10 +101,11 @@ export default class ProductDetails {
     document.querySelector(
       "#productName"
     ).innerHTML = this.product.NameWithoutBrand;
-    document.querySelector(
-      "#productImage"
-    ).src = this.product.Images.PrimaryLarge;
-    document.querySelector("#productImage").alt = this.product.Name;
+
+    // Fill image carousel
+    this.fillImages(this.product);
+    // End image carousel
+
     document.querySelector(
       ".product-card__price"
     ).innerHTML += this.product.FinalPrice;
@@ -113,5 +129,25 @@ export default class ProductDetails {
       discountElement.innerHTML += this.product.SuggestedRetailPrice.toFixed(2);
     }
     // End discount editing
+  }
+
+  fillImages() {
+    // Create list of images to add to the carousel
+    const imageList = [
+      { Title: this.product.Name, Src: this.product.Images.PrimaryLarge },
+    ];
+    if (this.product.Images.ExtraImages) {
+      Array.prototype.push.apply(imageList, this.product.Images.ExtraImages);
+    }
+
+    // Render images using carousel template
+    renderListWithTemplate(
+      document.querySelector("#image-template"),
+      document.querySelector("#image-carousel"),
+      imageList,
+      imageCarouselCallback.bind(this)
+    );
+
+    this.slideController.primeSlideController(".myImages");
   }
 }
