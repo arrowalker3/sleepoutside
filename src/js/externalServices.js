@@ -1,11 +1,14 @@
 const baseURL = "//157.201.228.93:2992/";
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
+
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
-  }
+    throw { name: 'servicesError', message: jsonResponse };
+    // console.log("Oops");
+    }
 }
 
 export default class ExternalServices {
@@ -33,6 +36,8 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload),
     };
+
+    // const thing1 = await fetch(baseURL + "checkout/", options);
     return await fetch(baseURL + "checkout/", options).then(convertToJson);
   }
 }

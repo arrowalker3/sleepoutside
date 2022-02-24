@@ -1,4 +1,4 @@
-import { getCartTotal, getLocalStorage } from "./utils.js";
+import { getCartTotal, getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.js";
 import ExternalServices from "./externalServices.js";
 
 const services = new ExternalServices();
@@ -65,12 +65,18 @@ export default class CheckoutProcess {
     json.tax = this.tax;
     json.shipping = this.shipping;
     json.items = packageItems(this.cartItems);
-    // console.log(json);
+    console.log("My json:", json);
     try {
       const res = await services.checkout(json);
-      console.log(res);
+      setLocalStorage('so-cart', []);
+      location.assign('/checkout/checkedout.html');
     } catch (err) {
-      console.log(err);
+      removeAllAlerts();
+      // for(let message in err.message) {
+      //   alertMessage(err.message[message]);
+      // }
+      alertMessage(err.message);
+
     }
   }
 }
