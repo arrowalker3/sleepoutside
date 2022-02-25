@@ -23,6 +23,24 @@ body {
   font-size: var(--font-base);
   color: var(--dark-grey);
 }
+
+.banner {
+  background: #009579;
+}
+.banner__content {
+  padding: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.banner__text {
+  flex-grow: 1;
+  text-align: center;
+  line-height: 1.4;
+  font-family: "Quicksand", sans-serif;
+}
+
 img {
   max-width: 100%;
 }
@@ -85,13 +103,19 @@ header {
 
 #news-form {
   position: absolute;
-  top: 180px;
-  left: 230px;
+  top: 13vw;
+  left: 20vw;
   background-image: radial-gradient(
     ellipse farthest-corner at 45px 45px,
     rgba(255, 255, 255, 0.8) 0%,
     rgba(255, 255, 255, 0.2)
   );
+}
+@media screen and (max-width: 800px) {
+  #news-form {
+    top: 10vw;
+    left: 11vw;
+  }
 }
 
 #news-form fieldset {

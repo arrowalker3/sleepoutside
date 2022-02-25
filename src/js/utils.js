@@ -111,10 +111,6 @@ export function getCartTotal(cartList) {
   return total.toFixed(2).toString();
   // Given 2 prices, returns % difference between the two,
   // rounded down to nearest multiple of 5
-
-  function getDiscount(listPrice, finalPrice) {
-    const diff = listPrice - finalPrice;
-
 }
 
 export function getDiscount(listPrice, finalPrice) {
@@ -125,4 +121,20 @@ export function getDiscount(listPrice, finalPrice) {
   const roundDown = Math.floor(percent / 5) * 5;
 
   return roundDown;
+}
+
+export function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
