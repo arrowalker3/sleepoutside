@@ -13,6 +13,7 @@ exports.renderWithTemplate = renderWithTemplate;
 exports.loadTemplate = loadTemplate;
 exports.loadHeaderFooter = loadHeaderFooter;
 exports.capitalizeFirstLetters = capitalizeFirstLetters;
+exports.getCartTotal = getCartTotal;
 exports.getDiscount = getDiscount;
 
 // wrapper for querySelector...returns matching element
@@ -57,7 +58,7 @@ function renderListWithTemplate(template, parentElement, list, callback) {
 }
 
 function renderWithTemplate(template, parentElement, data, callback) {
-  const clone = template.content.cloneNode(true);
+  let clone = template.content.cloneNode(true);
 
   if (callback != null) {
     clone = callback(clone, data);
@@ -74,13 +75,27 @@ async function loadTemplate(path) {
 }
 
 async function loadHeaderFooter() {
-  console.log(window.location.pathname);
+  // console.log(window.location.pathname);
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
   const domHeader = document.querySelector("#main-header");
   const domFooter = document.querySelector("#main-footer");
   renderWithTemplate(headerTemplate, domHeader);
   renderWithTemplate(footerTemplate, domFooter);
+
+  function counter() {
+    let count = 0;
+    let storedItems = getLocalStorage("so-cart");
+    storedItems.forEach(item => {
+      count += parseInt(item.qty);
+    });
+    return count;
+  } // function getLocalStorage(key) {
+  //   return JSON.parse(localStorage.getItem(key));
+  // }
+
+
+  document.querySelector("#count").innerHTML = counter();
 } // Separates words in string, then capitalizes first letter of each word
 // Returns a recombined string of the sentence
 
@@ -92,6 +107,17 @@ function capitalizeFirstLetters(str) {
     final.push(word.charAt(0).toUpperCase() + word.slice([1]));
   });
   return final.join(" ");
+}
+
+function getCartTotal(cartList) {
+  // foreach item,
+  // add to total
+  // return cart total
+  let total = 0;
+  cartList.forEach(product => {
+    total += product.FinalPrice * product.qty;
+  });
+  return total.toFixed(2).toString();
 } // Given 2 prices, returns % difference between the two,
 // rounded down to nearest multiple of 5
 
