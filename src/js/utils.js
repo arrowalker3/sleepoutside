@@ -109,6 +109,8 @@ export function getCartTotal(cartList) {
   });
 
   return total.toFixed(2).toString();
+  // Given 2 prices, returns % difference between the two,
+  // rounded down to nearest multiple of 5
 }
 
 // Given 2 prices, returns % difference between the two,
