@@ -21,7 +21,14 @@ export default class ProductList {
 
   prepareTemplate(clone, product) {
     clone.querySelector("#link").href += product.Id;
-    clone.querySelector("#image").src = product.Images.PrimaryMedium;
+    if (window.innerWidth > 800) {
+      clone.querySelector("#image").src = product.Images.PrimaryLarge;
+    } else if (window.innerWidth > 600) {
+      clone.querySelector("#image").src = product.Images.PrimaryMedium;
+    } else {
+      clone.querySelector("#image").src = product.Images.PrimarySmall;
+    }
+    // clone.querySelector("#image").src = product.Images.PrimaryMedium;
     clone.querySelector("#image").alt += product.Name;
     clone.querySelector(".card__brand").innerText = product.Brand.Name;
     clone.querySelector(".card__name").innerText = product.NameWithoutBrand;
